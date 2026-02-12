@@ -3,129 +3,207 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>X-MONSTER | WARRIOR PORTAL</title>
+    <title>INDIAN BATTLE ROYALE INDUS</title>
     <style>
-        body { background: #020617; color: #00ff41; font-family: 'Consolas', monospace; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; overflow: hidden; }
-        .master-frame { border: 2px solid #00ff41; background: rgba(15, 23, 42, 0.95); padding: 40px; width: 95%; max-width: 650px; border-radius: 20px; box-shadow: 0 0 40px rgba(0, 255, 65, 0.2); text-align: center; position: relative; }
-        .status-bar { display: flex; justify-content: space-between; margin-bottom: 25px; border-bottom: 1px solid #1e293b; padding-bottom: 10px; }
-        #clock { font-size: 1.5rem; color: #fff; font-weight: bold; }
-        #date { font-size: 0.9rem; color: #00ff41; opacity: 0.7; }
-        .game-title { font-size: 1.6rem; letter-spacing: 5px; color: #fff; font-weight: 900; margin-bottom: 5px; text-transform: uppercase; }
-        .launch-tag { color: #ff9933; font-size: 0.8rem; margin-bottom: 25px; letter-spacing: 2px; }
-        .countdown-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 35px; }
-        .unit-box { background: rgba(0, 255, 65, 0.05); padding: 15px 5px; border-radius: 12px; border: 1px solid rgba(0, 255, 65, 0.2); }
-        .val { font-size: 2.8rem; color: #fff; font-weight: 900; display: block; line-height: 1; }
-        .label { font-size: 0.6rem; color: #00ff41; text-transform: uppercase; margin-top: 8px; }
-        .form-container { display: flex; flex-direction: column; gap: 15px; }
-        input { background: #070e1a; border: 1px solid #1e293b; padding: 15px; color: #00ff41; border-radius: 8px; outline: none; text-align: center; font-family: 'Consolas', monospace; }
-        .action-btn { background: #00ff41; color: #000; border: none; padding: 18px; font-weight: bold; border-radius: 8px; cursor: pointer; text-transform: uppercase; letter-spacing: 2px; transition: 0.3s; font-size: 1rem; width: 100%; }
-        .action-btn:disabled { background: #1e293b; color: #555; cursor: not-allowed; }
-        #success-screen { display: none; flex-direction: column; justify-content: center; align-items: center; animation: fadeIn 0.8s; }
-        @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
-        .warrior-msg { color: #fff; font-size: 2.2rem; font-weight: 900; text-shadow: 0 0 15px #00ff41; margin-bottom: 10px; }
-        .sub-msg { color: #00ff41; letter-spacing: 2px; font-size: 1rem; margin-bottom: 15px; }
-        .response-note { color: #ff9933; font-size: 0.95rem; line-height: 1.6; font-weight: bold; margin-bottom: 25px; }
-        #loading-text { color: #94a3b8; font-size: 0.8rem; font-style: italic; }
-        .footer { margin-top: 35px; padding-top: 15px; border-top: 1px solid #1e293b; font-size: 11px; color: #94a3b8; }
-        .studio-mail a { color: #00ff41; text-decoration: none; font-weight: bold; }
+        :root { --neon: #00ff41; --dark: #020617; --gold: #ffcc00; --saffron: #FF9933; --green: #138808; }
+        body { background: var(--dark); color: var(--neon); font-family: 'Consolas', monospace; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; overflow-x: hidden; position: relative; flex-direction: column; padding: 20px 0; }
+        
+        /* Grid Background */
+        body::before { content: ""; position: absolute; width: 200%; height: 200%; top: -50%; left: -50%; background-image: linear-gradient(rgba(255,153,51,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(19,136,8,0.03) 1px, transparent 1px); background-size: 50px 50px; transform: perspective(500px) rotateX(60deg); animation: moveGrid 20s linear infinite; z-index: -1; }
+        @keyframes moveGrid { from { transform: translateY(0); } to { transform: translateY(50px); } }
+        
+        /* The Chakra (Check Mark/Wheel) */
+        .bg-chakra { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 450px; opacity: 0.05; color: #000080; pointer-events: none; z-index: -1; animation: spin 30s linear infinite; }
+        @keyframes spin { from {transform: translate(-50%, -50%) rotate(0deg);} to {transform: translate(-50%, -50%) rotate(360deg);} }
+
+        .master-frame { border: 1px solid rgba(0, 255, 65, 0.2); background: rgba(10, 15, 28, 0.98); padding: 30px; width: 92%; max-width: 550px; border-radius: 15px; box-shadow: 0 0 40px rgba(0,0,0,0.8); text-align: center; position: relative; border-top: 5px solid var(--saffron); border-bottom: 5px solid var(--green); }
+        .live-clock { position: absolute; top: -18px; right: 25px; background: #000; border: 1px solid var(--saffron); padding: 5px 15px; border-radius: 30px; font-size: 0.8rem; color: #fff; }
+
+        .brand-name { font-size: 1.8rem; letter-spacing: 2px; color: var(--gold); font-weight: 900; margin-bottom: 15px; text-shadow: 2px 2px var(--saffron); line-height: 1.2; text-transform: uppercase; }
+        
+        /* Live Registration Section */
+        .live-status-bar { background: rgba(0, 255, 65, 0.1); border: 1px solid var(--neon); padding: 10px; border-radius: 8px; margin-bottom: 20px; font-weight: bold; }
+        .pulse { display: inline-block; width: 10px; height: 10px; background: #ff0000; border-radius: 50%; margin-right: 8px; animation: blink 1s infinite; }
+        @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
+
+        .form-container { display: flex; flex-direction: column; gap: 12px; }
+        .row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        input, select { background: #0b1221; border: 1px solid #1e293b; padding: 12px; color: #fff; border-radius: 8px; outline: none; font-family: 'Consolas'; width: 100%; box-sizing: border-box; }
+        
+        .action-btn { background: linear-gradient(90deg, var(--saffron), #fff, var(--green)); color: #000; border: none; padding: 18px; font-weight: 900; border-radius: 8px; cursor: pointer; text-transform: uppercase; width: 100%; font-size: 1rem; margin-top: 5px; }
+
+        #success-screen { display: none; }
+        .id-card { background: #000; border: 2px solid var(--gold); padding: 15px; border-radius: 10px; margin: 20px 0; position: relative; }
+        .status-box { background: rgba(255,255,255,0.05); border-left: 5px solid var(--saffron); padding: 20px; border-radius: 10px; margin-bottom: 15px; text-align: left; }
+        
+        .btn-group { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .back-btn { background: #1e293b; color: #fff; border: 1px solid #334155; padding: 12px; border-radius: 8px; cursor: pointer; font-weight: bold; }
+        
+        .footer-jai-hind { margin-top: 25px; font-size: 0.8rem; letter-spacing: 2px; color: #fff; font-weight: bold; text-align: center; }
     </style>
 </head>
 <body>
 
+    <div class="bg-chakra">☸</div>
+
     <div class="master-frame">
+        <div class="live-clock">IST: <span id="clock">00:00:00</span></div>
+
         <div id="form-section">
-            <div class="status-bar">
-                <div id="clock">--:--:--</div>
-                <div id="date">INITIALIZING...</div>
+            <div class="brand-name">INDIAN BATTLE ROYALE INDUS</div>
+            
+            <div class="live-status-bar">
+                <span class="pulse"></span> LIVE: <span id="reg-count" style="color:var(--gold)">4,82,150</span> WARRIORS JOINED
             </div>
-            <div class="game-title">INDIAN BATTLE ROYALE INDUS</div>
-            <div class="launch-tag">OFFICIAL DEPLOYMENT: 15 AUGUST 2027</div>
-            <div class="countdown-grid">
-                <div class="unit-box"><span id="d" class="val">500+</span><div class="label">Days</div></div>
-                <div class="unit-box"><span id="h" class="val">--</span><div class="label">Hours</div></div>
-                <div class="unit-box"><span id="m" class="val">--</span><div class="label">Min</div></div>
-                <div class="unit-box"><span id="s" class="val">--</span><div class="label">Sec</div></div>
-            </div>
-            <form id="warrior-form" action="https://api.web3forms.com/submit" method="POST" class="form-container">
+
+            <form id="warrior-form" class="form-container">
                 <input type="hidden" name="access_key" value="59b48f5a-993e-47be-88af-4a127250d60a">
-                <input type="hidden" name="from_name" value="X-MONSTER STUDIO">
-                <input type="text" name="name" placeholder="OPERATOR NAME" required>
-                <input type="email" name="email" placeholder="SECURE LOGIN EMAIL" required>
-                <button type="submit" id="submit-btn" class="action-btn">INITIALIZE MISSION</button>
+                <input type="hidden" id="mail-body" name="message" value="">
+
+                <input type="text" name="name" placeholder="VEER NAME" required>
+                <div class="row">
+                    <input type="email" name="email" placeholder="SECURE EMAIL" required>
+                    <input type="number" name="pincode" placeholder="PIN CODE" required>
+                </div>
+                
+                <div class="row">
+                    <select name="state" required>
+                        <option value="" disabled selected>STATE/प्रदेश</option>
+                        <option>Andhra Pradesh</option><option>Arunachal Pradesh</option><option>Assam</option>
+                        <option>Bihar</option><option>Chhattisgarh</option><option>Goa</option>
+                        <option>Gujarat</option><option>Haryana</option><option>Himachal Pradesh</option>
+                        <option>Jharkhand</option><option>Karnataka</option><option>Kerala</option>
+                        <option>Madhya Pradesh</option><option>Maharashtra</option><option>Manipur</option>
+                        <option>Meghalaya</option><option>Mizoram</option><option>Nagaland</option>
+                        <option>Odisha</option><option>Punjab</option><option>Rajasthan</option>
+                        <option>Sikkim</option><option>Tamil Nadu</option><option>Telangana</option>
+                        <option>Tripura</option><option>Uttar Pradesh</option><option>Uttarakhand</option>
+                        <option>West Bengal</option><option>Delhi</option>
+                    </select>
+                    <select name="rank_style" required>
+                        <option value="" disabled selected>ROLE/भूमिका</option>
+                        <option>Sniper</option><option>Rusher</option><option>Tactician</option>
+                    </select>
+                </div>
+
+                <select id="lang-select" required>
+                    <option value="" disabled selected>SELECT LANGUAGE (28)</option>
+                    <option value="Hindi">Hindi (हिंदी)</option>
+                    <option value="English">English</option>
+                    <option value="Bengali">Bengali (বাংলা)</option>
+                    <option value="Telugu">Telugu (తెలుగు)</option>
+                    <option value="Marathi">Marathi (मराठी)</option>
+                    <option value="Tamil">Tamil (தமிழ்)</option>
+                    <option value="Urdu">Urdu (اردو)</option>
+                    <option value="Gujarati">Gujarati (ગુજરાતી)</option>
+                    <option value="Kannada">Kannada (ಕನ್ನಡ)</option>
+                    <option value="Malayalam">Malayalam (മലയാളം)</option>
+                    <option value="Punjabi">Punjabi (ਪੰਜਾਬੀ)</option>
+                    <option value="Bhojpuri">Bhojpuri (भोजपुरी)</option>
+                    <option value="Sanskrit">Sanskrit (संस्कृतम्)</option>
+                    <option value="Odia">Odia (ଓଡ଼ିଆ)</option>
+                    <option value="Assamese">Assamese (অসমীয়া)</option>
+                    <option value="Maithili">Maithili (मैथिली)</option>
+                    <option value="Santali">Santali (संताली)</option>
+                    <option value="Kashmiri">Kashmiri (कश्मीरी)</option>
+                    <option value="Nepali">Nepali (नेपाली)</option>
+                    <option value="Konkani">Konkani (कोंकणी)</option>
+                    <option value="Sindhi">Sindhi (सिंधी)</option>
+                    <option value="Dogri">Dogri (डोगरी)</option>
+                    <option value="Manipuri">Manipuri (মণিপুরী)</option>
+                    <option value="Bodo">Bodo (बोड़ो)</option>
+                    <option value="Rajasthani">Rajasthani (राजस्थानी)</option>
+                    <option value="Haryanvi">Haryanvi (हरियाणवी)</option>
+                    <option value="Himachali">Himachali (हिमाचली)</option>
+                    <option value="Tulu">Tulu (ತುಳು)</option>
+                </select>
+                
+                <button type="submit" id="submit-btn" class="action-btn">JAI HIND - REGISTER</button>
             </form>
         </div>
 
         <div id="success-screen">
-            <div class="warrior-msg">WELCOME, WARRIOR!</div>
-            <div class="sub-msg">YOUR LEGACY BEGINS NOW.</div>
-            <div class="response-note">
-                Expect a response within 24 hours.<br>
-                <span style="font-size: 0.85rem; color: #fff;">24 घंटे के भीतर आपको जवाब मिल जाएगा।</span>
+            <div style="font-size: 1.5rem; color: #fff; font-weight: 900;">MISSION LOGGED!</div>
+            <div class="id-card">
+                <div id="warrior-id" style="font-size: 1.5rem; color: var(--gold); font-weight: 900;">IND-7742-VEER</div>
+                <div style="font-size: 0.7rem; color: #fff; opacity: 0.6;">BATTLEFIELD ACCESS GRANTED</div>
             </div>
-            <p id="loading-text">Synchronizing Data... (10s)</p>
-        </div>
-
-        <div class="footer">
-            OFFICIAL DEV STUDIO ACCESS:
-            <div class="studio-mail"><a href="mailto:XMONSTERGAMINGDEVSTUDIOS@Zohomail.in">XMONSTERGAMINGDEVSTUDIOS@Zohomail.in</a></div>
+            <div class="status-box">
+                <span style="color:var(--gold); display:block; font-weight:900; margin-bottom:10px;">Soldier, your data will reach you within 24 hours</span>
+                <div id="dynamic-msg" style="color:#fff; font-size:0.9rem; line-height:1.4;"></div>
+            </div>
+            
+            <div class="btn-group">
+                <button class="back-btn" onclick="location.reload()">BACK (Piche)</button>
+                <button class="action-btn" style="margin-top:0; padding:12px;" onclick="alert('Warrior ID Shared!')">SHARE ID</button>
+            </div>
+            <div style="font-size: 0.7rem; color: #fff; margin-top: 15px; opacity: 0.5;">REBOOTING IN <span id="reboot-timer">10</span>s</div>
         </div>
     </div>
 
+    <div class="footer-jai-hind">🇮🇳 JAI HIND | INDIAN BATTLE ROYALE INDUS 🇮🇳</div>
+
     <script>
-        // Real-time update function
-        function updateTimer() {
-            const now = new Date();
-            const clockEl = document.getElementById('clock');
-            const dateEl = document.getElementById('date');
+        const langData = {
+            "Hindi": "सैनिक, आपका डेटा 24 घंटे में आपके पास पहुँच जाएगा। जिस भाषा में आपने चुनाव किया है, उसी में आपका मेल जाएगा 24 घंटे बाद।",
+            "English": "Soldier, your data will reach you within 24 hours. Your mail will reach you in the language you selected after 24 hours.",
+            "Bengali": "সৈনিক, আপনার ডেটা ২৪ ঘণ্টার মধ্যে পৌঁছে যাবে। আপনি যে ভাষাটি বেছে নিয়েছেন তার মধ্যে আপনার মেইলটি ২৪ ঘন্টা পরে পৌঁছে যাবে।",
+            "Telugu": "సైనికుడు, మీ డేటా 24 గంటల్లో మీకు చేరుతుంది. మీరు ఎంచుకున్న భాషలో మీ మెయిల్ 24 గంటల తర్వాత చేరుకుంటుంది.",
+            "Marathi": "सैनिक, तुमचा डेटा २४ तासांत तुमच्यापर्यंत पोहोचेल. तुम्ही निवडलेल्या भाषेत तुमचा मेल २४ तासानंतर पोहोचेल.",
+            "Tamil": "வீரரே, உங்கள் தரவு 24 மணி நேரத்திற்குள் உங்களை வந்தடையும். நீங்கள் தேர்ந்தெடுத்த மொழியில் உங்கள் மின்னஞ்சல் 24 மணிநேரத்திற்குப் பிறகு உங்களை வந்தடையும்.",
+            "Urdu": "سپاہی، آپ کا ڈیٹا 24 گھنٹوں کے اندر پہنچ جائے گا۔ آپ کی منتخب کردہ زبان میں آپ کا میل 24 گھنٹے بعد پہنچ جائے گا۔",
+            "Gujarati": "સૈનિક, તમારો ડેટા 24 કલાકમાં તમારી પાસે પહોંચી જશે. તમે પસંદ કરેલી ભાષામાં તમારો મેઇલ 24 કલાક પછી તમારી પાસે પહોંચી જશે.",
+            "Kannada": "ಸೈನಿಕ, ನಿಮ್ಮ ಡೇಟಾ 24 ಗಂಟೆಗಳ ಒಳಗೆ ನಿಮ್ಮನ್ನು ತಲುಪುತ್ತದೆ. ನೀವು ಆಯ್ಕೆ ಮಾಡಿದ ಭಾಷೆಯಲ್ಲಿ ನಿಮ್ಮ ಮೇಲ್ 24 ಗಂಟೆಗಳ ನಂತರ ನಿಮ್ಮನ್ನು ತಲುಪುತ್ತದೆ.",
+            "Malayalam": "സൈനಿಕാ, നിങ്ങളുടെ ഡാറ്റ 24 മണിക്കൂറിനുള്ളിൽ നിങ്ങളിലെത്തും. നിങ്ങൾ തിരഞ്ഞെടുത്ത ഭാഷയിൽ 24 മണിക്കൂറിന് ശേഷം നിങ്ങളുടെ മെയിൽ നിങ്ങളിലെത്തും.",
+            "Punjabi": "ਸੈਨਿਕ, ਤੁਹਾਡਾ ਡੇਟਾ 24 ਘੰਟਿਆਂ ਵਿੱਚ ਤੁਹਾਡੇ ਤੱਕ ਪਹੁੰਚ ਜਾਵੇਗਾ। ਤੁਹਾਡੇ ਵੱਲੋਂ ਚੁਣੀ ਗਈ ਭਾਸ਼ਾ ਵਿੱਚ ਤੁਹਾਡੀ ਮੇਲ 24 ਘੰਟਿਆਂ ਬਾਅਦ ਪਹੁੰਚ ਜਾਵੇਗੀ।",
+            "Bhojpuri": "सैनिक, राउर डेटा 24 घंटा में राउर लगे पहुँच जाई। जवना भाषा के रउआ चुनाव कइले बानी, ओही में राउर मेल 24 घंटा बाद जाई।",
+            "Sanskrit": "सैनिक, तव तथ्यं २४ होराभ्यन्तरे त्वाम् आगमिष्यति। चित भाषायां तव पत्रम् २४ होरानन्तरं गमिष्यति।",
+            "Odia": "ସୈନିକ, ଆପଣଙ୍କର ତଥ୍ୟ ୨୪ ଘଣ୍ଟା ମଧ୍ୟରେ ପହଞ୍ଚିଯିବ | ଆପଣ ବାଛିଥିବା ଭಾଷାରେ ଆପଣଙ୍କର ମେଲ୍ ୨४ ଘଣ୍ଟା ପରେ ପହଞ୍ଚିଯିବ |",
+            "Assamese": "সৈনিক, আপোনাৰ তথ্য ২৪ ঘণ্টাৰ ভিতৰত আপোনাৰ ওচৰ পাব। আপুনি বাছনি কৰা ভাষাত আপোনাৰ মেইল ২৪ ঘণ্টাৰ পিছত পাব।",
+            "Maithili": "सैनिक, अहाँक डेटा २४ घंटाक भीतर अहाँक लग पहुँचि जाएत। अहाँ जे भाषा चुनाव कयने छी, ओहीमे अहाँक मेल २४ घंटाक बाद जाएत।",
+            "Santali": "ᱥᱤᱯᱟᱹᱦᱤ, ᱟᱢᱟᱜ ᱰᱮᱴᱟ ᱒᱔ ᱜᱷᱟᱱᱴᱟ ᱨᱮ ᱟᱢ ᱴᱷᱮᱱ ᱥᱮᱴᱮᱨᱚᱜᱼᱟ ᱾ ᱟᱢ ᱡᱟᱦᱟᱸ ᱯᱟᱹᱨᱥᱤ ᱮᱢ ᱵᱟᱪᱷᱟᱣ ᱟᱠᱟᱫᱼᱟ, ᱚᱱᱟ ᱛᱮᱜᱮ ᱟᱢᱟᱜ ᱢᱮᱞ ᱒᱔ ᱜᱷᱟᱱᱴᱟ ᱛᱟᱭᱚਮ ᱥᱮᱱᱚᱜᱼᱟ ᱾",
+            "Kashmiri": "عسکر، تُہند ڈیٹا ۲۴ گھنٹن مَنٛز پہنچنہٕ۔ تۄہہِ مژھ کٔرِتھ زَبانہِ مَنٛز گژھہِ تُہہ تان میل ۲۴ گھنٹن پتہٕ پہنچنہٕ।",
+            "Nepali": "सैनिक, तपाईंको डाटा २४ घण्टा भित्र तपाईं सम्म पुग्नेछ। तपाईंले छनौट गर्नुभएको भाषामा तपाईंको मेल २४ घण्टा पछि पुग्नेछ।",
+            "Konkani": "सैनिका, तुजो डेटा २४ वरां भितर तुजे कडेन पावतलो. तुज्या वेंचून काडिल्ल्या भाशेंंत तुजो मेल २४ वरां उपरांत पावतलो.",
+            "Sindhi": "سپاہي، توهان جو ڊيٽا 24 ڪلاڪن اندر توهان تائين پهچي ويندو. توهان جي چونڊيل ٻوليءَ ۾ توهان جو ميل 24 ڪلاڪن کانپوءِ پهچي ويندو.",
+            "Dogri": "सैनिक, तुंदा डेटा 24 घन्टे दे अंदर तुंदे कोल पुज्जी जाग। तुंदी चुनी गेदी भाषा च तुंदा मेल 24 घन्टे दे बाद पुग्गग।",
+            "Manipuri": "লান্মী, নহাক্কী দাতা পুং ২৪ গী মনুংদা নহাক্কী মফમদা য়ৌরক্কনি। নহাক্না খল্লকপা লোন অসিদা পুং ২৪ গী মতুংদা নहাক্কী মেল লাক্কনি।",
+            "Bodo": "सैनिक, नोंथांनि डेटाया 24 घन्टानि गेजेराव नोंथांनियाव सौफैगोन। नोंथांनि सायखनाय रावजोंनो 24 घन्टानि उनाव नोंथांनि मेलआ थांगोन।",
+            "Rajasthani": "सैनिक, थारो डेटा 24 घंटां मांय थारे कनै पूग ज्यासी। थारी चुણી ओडी भासा मांय थारो मेल 24 घंटां बाद पूग ज्यासी।",
+            "Haryanvi": "सैनिक, थारा डेटा 24 घंटे में थारे धौरे पहुँच ज्यागा। थारी चुनी होइ भाषा में थारा मेल 24 घंटे पाछै पहुँच ज्यागा।",
+            "Himachali": "सैनिक, तुंदा डेटा 24 घंटे दे अंदर तुंदे कोल पुज्जी जाणा। तुंदी चुणी गेदी भाषा च तुंदा मेल 24 घंटे बाद पुज्जी जाणा।",
+            "Tulu": "ಸೈನಿಕರೆ, ನಿಮ್ಮ ದತ್ತಾಂಶ 24 ಗಂಟೆದ ಉಲಯಿ ನಿಮ್ಮಡೆ ಎತ್ತುಂಡು. ಈರ್ ಆಯ್ಕೆ ಮಲ್ದಿನ ಭಾಷೆಡೆ 24 ಗಂಟೆದ ಬೊಕ್ಕ ನಿಮ್ಮ ಮೇಲ್ ಎತ್ತುಂಡು."
+        };
+
+        // Update Clock and Fake Registration Counter
+        setInterval(() => {
+            document.getElementById('clock').innerText = new Date().toLocaleTimeString('en-IN', {hour12:false});
+            let c = parseInt(document.getElementById('reg-count').innerText.replace(/,/g, ''));
+            document.getElementById('reg-count').innerText = (c + Math.floor(Math.random()*2)).toLocaleString();
+        }, 1000);
+
+        document.getElementById('warrior-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const lang = document.getElementById('lang-select').value;
+            const msg = langData[lang] || langData["English"];
+            document.getElementById('mail-body').value = msg;
+            document.getElementById('submit-btn').innerText = "ESTABLISHING UPLINK...";
             
-            if(clockEl) clockEl.innerText = now.toLocaleTimeString();
-            if(dateEl) dateEl.innerText = now.toDateString().toUpperCase();
+            try {
+                await fetch('https://api.web3forms.com/submit', { method: 'POST', body: new FormData(this) });
+                document.getElementById('form-section').style.display = 'none';
+                document.getElementById('success-screen').style.display = 'block';
+                document.getElementById('dynamic-msg').innerText = msg;
 
-            const target = new Date('August 15, 2027 00:00:00');
-            const diff = target - now;
-
-            if (diff > 0) {
-                document.getElementById('d').innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
-                document.getElementById('h').innerText = Math.floor((diff / (1000 * 60 * 60)) % 24).toString().padStart(2, '0');
-                document.getElementById('m').innerText = Math.floor((diff / 1000 / 60) % 60).toString().padStart(2, '0');
-                document.getElementById('s').innerText = Math.floor((diff / 1000) % 60).toString().padStart(2, '0');
-            }
-        }
-
-        // Form handling
-        const form = document.getElementById('warrior-form');
-        const submitBtn = document.getElementById('submit-btn');
-
-        if(form) {
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
-                submitBtn.disabled = true;
-                submitBtn.innerText = "SENDING...";
-
-                const formData = new FormData(form);
-                fetch(form.action, { method: 'POST', body: formData });
-
-                setTimeout(() => {
-                    document.getElementById('form-section').style.display = 'none';
-                    document.getElementById('success-screen').style.display = 'flex';
-                    
-                    let timeLeft = 10;
-                    const loadingText = document.getElementById('loading-text');
-                    const timer = setInterval(() => {
-                        timeLeft--;
-                        loadingText.innerText = `Synchronizing Data... (${timeLeft}s)`;
-                        if (timeLeft <= 0) {
-                            clearInterval(timer);
-                            window.location.reload();
-                        }
-                    }, 1000);
-                }, 600);
-            });
-        }
-
-        // Instant call and interval
-        updateTimer(); 
-        setInterval(updateTimer, 1000);
+                let time = 10;
+                const timer = setInterval(() => {
+                    time--;
+                    if(time >= 0) document.getElementById('reboot-timer').innerText = time;
+                    if(time === 0) { clearInterval(timer); location.reload(); }
+                }, 1000);
+            } catch(e) { alert("Signal Lost!"); }
+        });
     </script>
 </body>
 </html>
+    
