@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -47,13 +47,12 @@
         }
 
         .launch-date-tag {
-            color: #ff9933; /* Saffron touch for 15 Aug */
+            color: #ff9933;
             font-size: 0.9rem;
             margin-bottom: 25px;
             letter-spacing: 2px;
         }
 
-        /* COUNTDOWN GRID */
         .countdown-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -82,7 +81,6 @@
             margin-top: 5px;
         }
 
-        /* FORM SECTION */
         .form-group {
             display: flex;
             flex-direction: column;
@@ -110,6 +108,7 @@
             cursor: pointer;
             text-transform: uppercase;
             letter-spacing: 2px;
+            transition: 0.3s;
         }
 
         button:hover { background: #fff; transform: translateY(-2px); }
@@ -137,28 +136,16 @@
         <div class="launch-date-tag">TARGET DEPLOYMENT: 15 AUGUST 2027</div>
 
         <div class="countdown-grid">
-            <div class="unit-box">
-                <span id="d" class="val">00</span>
-                <div class="label">Days</div>
-            </div>
-            <div class="unit-box">
-                <span id="h" class="val">00</span>
-                <div class="label">Hours</div>
-            </div>
-            <div class="unit-box">
-                <span id="m" class="val">00</span>
-                <div class="label">Min</div>
-            </div>
-            <div class="unit-box">
-                <span id="s" class="val">00</span>
-                <div class="label">Sec</div>
-            </div>
+            <div class="unit-box"><span id="d" class="val">00</span><div class="label">Days</div></div>
+            <div class="unit-box"><span id="h" class="val">00</span><div class="label">Hours</div></div>
+            <div class="unit-box"><span id="m" class="val">00</span><div class="label">Min</div></div>
+            <div class="unit-box"><span id="s" class="val">00</span><div class="label">Sec</div></div>
         </div>
 
         <div class="form-group">
             <input type="text" placeholder="OPERATOR NAME">
             <input type="email" placeholder="SECURE LOGIN EMAIL">
-            <button onclick="alert('X-MONSTER Strategic Protocol Initiated.')">START MISSION</button>
+            <button onclick="startMission()">START MISSION</button>
         </div>
 
         <div class="footer">
@@ -168,14 +155,16 @@
     </div>
 
     <script>
+        function startMission() {
+            // Instant redirect to your GitHub link
+            window.location.href = "https://xmonstergamingdevstudios.github.io/IBRI--PRE_REGISTRATION-Form/";
+        }
+
         function updateTimer() {
             const now = new Date();
-            
-            // 1. Live Clock
             document.getElementById('clock').innerText = now.toLocaleTimeString();
             document.getElementById('date').innerText = now.toDateString().toUpperCase();
 
-            // 2. Countdown to 15 Aug 2027
             const target = new Date('August 15, 2027 00:00:00');
             const diff = target - now;
 
@@ -191,7 +180,6 @@
                 document.getElementById('s').innerText = secs.toString().padStart(2, '0');
             }
         }
-
         setInterval(updateTimer, 1000);
         updateTimer();
     </script>
