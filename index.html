@@ -36,7 +36,10 @@
         @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
         .warrior-msg { color: #fff; font-size: 2.2rem; font-weight: 900; text-shadow: 0 0 15px #00ff41; margin-bottom: 10px; }
         .sub-msg { color: #00ff41; letter-spacing: 2px; font-size: 1rem; margin-bottom: 15px; }
-        .response-note { color: #ff9933; font-size: 0.9rem; font-weight: bold; margin-bottom: 25px; }
+        
+        /* Hindi + English Message Section */
+        .response-note { color: #ff9933; font-size: 0.95rem; line-height: 1.6; font-weight: bold; margin-bottom: 25px; }
+        
         #loading-text { color: #94a3b8; font-size: 0.8rem; font-style: italic; }
 
         .footer { margin-top: 35px; padding-top: 15px; border-top: 1px solid #1e293b; font-size: 11px; color: #94a3b8; }
@@ -64,9 +67,11 @@
 
             <form id="warrior-form" action="https://api.web3forms.com/submit" method="POST" class="form-container">
                 <input type="hidden" name="access_key" value="59b48f5a-993e-47be-88af-4a127250d60a">
+                <input type="hidden" name="from_name" value="X-MONSTER STUDIO">
+                
                 <input type="text" name="name" placeholder="OPERATOR NAME" required>
                 <input type="email" name="email" placeholder="SECURE LOGIN EMAIL" required>
-                <input type="hidden" name="redirect" value=""> 
+                
                 <button type="submit" class="action-btn">INITIALIZE MISSION</button>
             </form>
         </div>
@@ -74,7 +79,12 @@
         <div id="success-screen">
             <div class="warrior-msg">WELCOME, WARRIOR!</div>
             <div class="sub-msg">YOUR LEGACY BEGINS NOW.</div>
-            <div class="response-note">COMMUNICATION LINK: Expect a response within 24 hours.</div>
+            
+            <div class="response-note">
+                Expect a response within 24 hours.<br>
+                <span style="font-size: 0.85rem; color: #fff;">24 घंटे के भीतर आपको जवाब मिल जाएगा।</span>
+            </div>
+            
             <p id="loading-text">Synchronizing Data... (10s)</p>
         </div>
 
@@ -89,7 +99,13 @@
     <script>
         const form = document.getElementById('warrior-form');
         form.addEventListener('submit', function(e) {
-            setTimeout(() => {
+            e.preventDefault();
+            const formData = new FormData(form);
+            
+            fetch(form.action, {
+                method: 'POST',
+                body: formData
+            }).then(() => {
                 document.getElementById('form-section').style.display = 'none';
                 document.getElementById('success-screen').style.display = 'flex';
                 
@@ -104,7 +120,7 @@
                         window.location.reload();
                     }
                 }, 1000);
-            }, 500); 
+            });
         });
 
         function updateTimer() {
