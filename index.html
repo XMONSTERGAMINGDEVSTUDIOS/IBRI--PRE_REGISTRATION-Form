@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IBRI - BAJRANGI COMMAND</title>
+    <style>
+        :root { --p-color: #ff3300; --s-color: #ffae00; --g-color: #00ff41; --yt-red: #ff0000; }
+        
+        body {
+            margin: 0; padding: 0; background: #000;
+            color: #fff; font-family: 'Courier New', monospace;
+            overflow-x: hidden; text-align: center;
+        }
+
+        /* Cyber Grid Background */
+        .grid-bg {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            background-size: 100% 2px, 3px 100%; z-index: -1;
+        }
+
+        .header-danger {
+            background: var(--p-color); color: #000;
+            font-weight: 900; padding: 10px; font-size: 0.8rem;
+            text-transform: uppercase; letter-spacing: 2px;
+            box-shadow: 0 0 15px var(--p-color);
+        }
+
+        /* Logo & Swords Fixed Design */
+        .logo-wrapper {
+            position: relative; width: 160px; height: 160px; margin: 20px auto;
+        }
+
+        .swords-icon {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            font-size: 120px; z-index: 2; pointer-events: none;
+            filter: drop-shadow(0 0 15px var(--p-color));
+        }
+
+        .ai-core-ultra {
+            width: 110px; height: 110px; border-radius: 50%;
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            border: 3px solid var(--s-color);
+            background: url('1770645658272.png') center/cover;
+            box-shadow: 0 0 40px var(--p-color); z-index: 1;
+            animation: pulse-ring 2s infinite ease-in-out;
+        }
+
+        @keyframes pulse-ring {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.05); }
+        }
+
+        .main-card {
+            background: rgba(10, 10, 10, 0.95);
+            border: 1px solid #333; padding: 25px;
+            border-radius: 8px; max-width: 400px; margin: 10px auto;
+        }
+
+        input {
+            width: 100%; padding: 14px; margin: 8px 0; box-sizing: border-box;
+            background: #000; border: 1px solid #444; color: var(--g-color);
+            font-size: 0.9rem; outline: none;
+        }
+
+        .btn-danger {
+            background: #fff; color: #000; border: none;
+            padding: 16px; width: 100%; font-weight: 900;
+            cursor: pointer; margin-top: 10px;
+            clip-path: polygon(5% 0%, 100% 0%, 95% 100%, 0% 100%);
+        }
+
+        /* YouTube Button Glow */
+        .yt-btn {
+            display: none; background: var(--yt-red); color: #fff;
+            text-decoration: none; padding: 18px; font-weight: bold;
+            border-radius: 4px; margin-top: 20px; 
+            border: 1px solid #fff; box-shadow: 0 0 20px var(--yt-red);
+            transition: 0.3s;
+        }
+
+        #success-msg { display: none; margin-top: 15px; }
+    </style>
+</head>
+<body>
+
+    <div class="grid-bg"></div>
+    <div class="header-danger">IBRI: BAJRANGI AI ACTIVE</div>
+
+    <div style="padding: 15px;">
+        <div style="color: var(--g-color); font-size: 0.75rem; margin-bottom: 10px;">
+            ● ENCRYPTED CONNECTIONS: <span id="reg-count">33,560</span>
+        </div>
+        
+        <div class="logo-wrapper">
+            <div class="swords-icon">⚔️</div>
+            <div class="ai-core-ultra"></div>
+        </div>
+
+        <div class="main-card">
+            <h2 style="color:var(--s-color); margin: 0 0 15px 0; font-size: 1.5rem;">IBRI REGISTRATION</h2>
+            
+            <div id="form-box">
+                <form id="contact-form">
+                    <input type="hidden" name="access_key" value="59b48f5a-993e-47be-88af-4a127250d60a">
+                    <input type="text" name="name" placeholder="FULL NAME" required>
+                    <input type="email" name="email" placeholder="EMAIL ADDRESS" required>
+                    <input type="text" name="uid" placeholder="GAME UID" required>
+                    <button type="submit" id="submit-btn" class="btn-danger">LINK SHIELD</button>
+                </form>
+            </div>
+
+            <div id="success-msg">
+                <h3 style="color:var(--g-color);">✅ SUCCESS!</h3>
+                <p style="font-size: 0.8rem; color: #aaa;">Data secured. Follow YouTube for Launch Date.</p>
+                <a href="https://www.youtube.com/@INDIANBATTLEROYALINDUS" 
+                   target="_blank" 
+                   class="yt-btn" 
+                   id="yt-link" 
+                   onclick="refreshPage()">
+                    ▶ JOIN COMMAND CENTER
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 1. Live Counter
+        let count = 33560;
+        setInterval(() => {
+            count += Math.floor(Math.random() * 4) + 1;
+            document.getElementById('reg-count').innerText = count.toLocaleString();
+        }, 2500);
+
+        // 2. Form Submission logic
+        const form = document.getElementById('contact-form');
+        const btn = document.getElementById('submit-btn');
+        const successBox = document.getElementById('success-msg');
+        const ytBtn = document.getElementById('yt-link');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            btn.innerText = "SENDING...";
+            btn.disabled = true;
+
+            const formData = new FormData(form);
+            fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                body: formData
+            }).then(() => {
+                document.getElementById('form-box').style.display = 'none';
+                successBox.style.display = 'block';
+                ytBtn.style.display = 'block';
+            }).catch(() => {
+                alert("Error! Check connection.");
+                btn.innerText = "LINK SHIELD";
+                btn.disabled = false;
+            });
+        });
+
+        // 3. Refresh on Click
+        function refreshPage() {
+            setTimeout(() => {
+                window.location.reload();
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
