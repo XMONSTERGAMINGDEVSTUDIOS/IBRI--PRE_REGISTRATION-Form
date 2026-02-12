@@ -2,137 +2,160 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>IBRI Mission Control | Protected</title>
+    <title>IBRI Alpha | Protected by Bajrangi</title>
     <style>
-        /* Dark Cyber Theme */
         body {
             background: #020617;
-            color: #fff;
-            font-family: 'Segoe UI', sans-serif;
+            color: #00ff41;
+            font-family: 'Consolas', monospace;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
             margin: 0;
-            overflow: hidden;
+            overflow-x: hidden;
         }
 
-        .dashboard {
-            border: 2px solid #ff9933; /* Protection Orange */
-            padding: 50px;
-            background: rgba(255, 153, 51, 0.05);
-            box-shadow: 0 0 40px rgba(255, 153, 51, 0.3);
-            border-radius: 25px;
-            text-align: center;
+        .main-frame {
+            border: 2px solid #ff9933;
+            background: rgba(15, 23, 42, 0.9);
+            padding: 30px;
             width: 90%;
-            max-width: 600px;
+            max-width: 800px;
+            border-radius: 15px;
+            box-shadow: 0 0 40px rgba(255, 153, 51, 0.2);
             position: relative;
         }
 
-        /* Protection Header */
-        .header {
+        .header-tag {
             background: #ff9933;
             color: #000;
-            font-weight: 900;
-            padding: 10px 30px;
-            font-size: 16px;
-            letter-spacing: 3px;
+            font-weight: bold;
+            padding: 5px 20px;
             position: absolute;
             top: 0;
             left: 50%;
             transform: translateX(-50%);
-            border-radius: 0 0 15px 15px;
-        }
-
-        /* Time & Date Section */
-        .live-info {
-            margin-bottom: 40px;
-            margin-top: 20px;
-        }
-
-        #live-time {
-            font-size: 5rem;
-            font-weight: bold;
-            margin: 0;
-            text-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
-        }
-
-        #live-date {
-            font-size: 1.2rem;
-            color: #00ff41; /* Matrix Green for Date */
-            letter-spacing: 5px;
-            text-transform: uppercase;
-        }
-
-        /* Countdown Section */
-        .countdown-box {
-            border-top: 1px solid #1e293b;
-            padding-top: 30px;
-        }
-
-        .days-value {
-            font-size: 7rem;
-            font-weight: 900;
-            color: #ff9933;
-            line-height: 1;
-        }
-
-        .label {
-            font-size: 1rem;
-            color: #94a3b8;
+            border-radius: 0 0 10px 10px;
             letter-spacing: 2px;
-            margin-top: 10px;
         }
 
-        .game-name {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #fff;
-            margin-top: 5px;
-            text-transform: uppercase;
+        /* --- LIVE TRACKER SECTION --- */
+        .live-status-bar {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #1e293b;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
         }
+
+        #live-clock { font-size: 2rem; color: #fff; font-weight: bold; }
+        #live-date { font-size: 1rem; color: #ff9933; }
+
+        /* --- COUNTDOWN DISPLAY --- */
+        .countdown-display {
+            text-align: center;
+            background: rgba(0, 255, 65, 0.05);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+        }
+
+        .days-count { font-size: 4rem; color: #fff; display: block; line-height: 1; }
+        .game-info { font-size: 0.9rem; letter-spacing: 3px; color: #00ff41; margin-top: 10px; }
+
+        /* --- FORM / INPUT SECTION --- */
+        .input-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        input {
+            background: #0f172a;
+            border: 1px solid #334155;
+            padding: 12px;
+            color: #00ff41;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        button {
+            background: #00ff41;
+            color: #000;
+            border: none;
+            padding: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 5px;
+            width: 100%;
+            transition: 0.3s;
+        }
+
+        button:hover { background: #ff9933; }
+
+        /* --- SYSTEM LOGS --- */
+        .system-logs {
+            background: #000;
+            padding: 15px;
+            height: 100px;
+            overflow-y: auto;
+            font-size: 12px;
+            border-radius: 5px;
+            border-left: 3px solid #ff9933;
+        }
+
+        .log-entry { margin-bottom: 5px; }
+        .log-entry span { color: #ff9933; }
     </style>
 </head>
 <body>
 
-    <div class="dashboard">
-        <div class="header">PROTECTED BY BAJRANGI</div>
-        
-        <div class="live-info">
-            <div id="live-date">FETCHING DATE...</div>
-            <h1 id="live-time">00:00:00</h1>
+    <div class="main-frame">
+        <div class="header-tag">PROTECTED BY BAJRANGI</div>
+
+        <div class="live-status-bar">
+            <div id="live-date">12 FEB 2026</div>
+            <div id="live-clock">00:00:00</div>
         </div>
 
-        <div class="countdown-box">
-            <div class="days-value" id="days-count">--</div>
-            <div class="game-name">IBRI: Indian Battle Royale (Indus)</div>
-            <div class="label">DAYS UNTIL DEPLOYMENT</div>
+        <div class="countdown-display">
+            <span class="days-count" id="days-val">--</span>
+            <div class="game-info">IBRI: INDIAN BATTLE ROYALE (INDUS)</div>
+            <div style="font-size: 10px; color: #444;">ESTIMATED DEPLOYMENT COUNTDOWN</div>
+        </div>
+
+        <div class="input-section">
+            <input type="text" placeholder="DEVELOPER_ID: 1%_BOY">
+            <input type="text" placeholder="SYSTEM_GHZ: 5.8">
+            <input type="text" placeholder="MISSION: EMPIRE_BUILDING" style="grid-column: span 2;">
+            <button style="grid-column: span 2;">INITIALIZE 10.0 GHz UPGRADE</button>
+        </div>
+
+        <div class="system-logs">
+            <div class="log-entry"><span>[SYS]</span> Powering up IBRI Alpha Core...</div>
+            <div class="log-entry"><span>[SEC]</span> Protection enabled by Bajrangi.</div>
+            <div class="log-entry"><span>[NET]</span> Tracking Indus Launch protocols...</div>
         </div>
     </div>
 
     <script>
-        function updateDashboard() {
+        function updateAll() {
             const now = new Date();
-
-            // 1. Live Time & Date Update (Auto)
-            document.getElementById('live-time').innerText = now.toLocaleTimeString();
+            
+            // 1. Clock & Date
+            document.getElementById('live-clock').innerText = now.toLocaleTimeString();
             document.getElementById('live-date').innerText = now.toDateString().toUpperCase();
 
-            // 2. Countdown to Game Launch (Target: May 1, 2026)
-            const launchDate = new Date('May 1, 2026 00:00:00');
-            const diff = launchDate - now;
-
-            if (diff > 0) {
-                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-                document.getElementById('days-count').innerText = days;
-            } else {
-                document.getElementById('days-count').innerText = "LIVE";
-            }
+            // 2. Countdown to May 1, 2026
+            const target = new Date('May 1, 2026 00:00:00');
+            const diff = target - now;
+            document.getElementById('days-val').innerText = Math.max(0, Math.floor(diff / (1000 * 60 * 60 * 24)));
         }
 
-        // System Refresh Every Second
-        setInterval(updateDashboard, 1000);
-        updateDashboard();
+        setInterval(updateAll, 1000);
+        updateAll();
     </script>
 </body>
 </html>
