@@ -1,209 +1,168 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>INDIAN BATTLE ROYALE INDUS</title>
+    <title>INDUS BATTLE ROYALE | OFFICIAL</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
     <style>
-        :root { --neon: #00ff41; --dark: #020617; --gold: #ffcc00; --saffron: #FF9933; --green: #138808; }
-        body { background: var(--dark); color: var(--neon); font-family: 'Consolas', monospace; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; overflow-x: hidden; position: relative; flex-direction: column; padding: 20px 0; }
-        
-        /* Grid Background */
-        body::before { content: ""; position: absolute; width: 200%; height: 200%; top: -50%; left: -50%; background-image: linear-gradient(rgba(255,153,51,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(19,136,8,0.03) 1px, transparent 1px); background-size: 50px 50px; transform: perspective(500px) rotateX(60deg); animation: moveGrid 20s linear infinite; z-index: -1; }
-        @keyframes moveGrid { from { transform: translateY(0); } to { transform: translateY(50px); } }
-        
-        /* The Chakra (Check Mark/Wheel) */
-        .bg-chakra { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 450px; opacity: 0.05; color: #000080; pointer-events: none; z-index: -1; animation: spin 30s linear infinite; }
-        @keyframes spin { from {transform: translate(-50%, -50%) rotate(0deg);} to {transform: translate(-50%, -50%) rotate(360deg);} }
-
-        .master-frame { border: 1px solid rgba(0, 255, 65, 0.2); background: rgba(10, 15, 28, 0.98); padding: 30px; width: 92%; max-width: 550px; border-radius: 15px; box-shadow: 0 0 40px rgba(0,0,0,0.8); text-align: center; position: relative; border-top: 5px solid var(--saffron); border-bottom: 5px solid var(--green); }
-        .live-clock { position: absolute; top: -18px; right: 25px; background: #000; border: 1px solid var(--saffron); padding: 5px 15px; border-radius: 30px; font-size: 0.8rem; color: #fff; }
-
-        .brand-name { font-size: 1.8rem; letter-spacing: 2px; color: var(--gold); font-weight: 900; margin-bottom: 15px; text-shadow: 2px 2px var(--saffron); line-height: 1.2; text-transform: uppercase; }
-        
-        /* Live Registration Section */
-        .live-status-bar { background: rgba(0, 255, 65, 0.1); border: 1px solid var(--neon); padding: 10px; border-radius: 8px; margin-bottom: 20px; font-weight: bold; }
-        .pulse { display: inline-block; width: 10px; height: 10px; background: #ff0000; border-radius: 50%; margin-right: 8px; animation: blink 1s infinite; }
-        @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
-
-        .form-container { display: flex; flex-direction: column; gap: 12px; }
-        .row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        input, select { background: #0b1221; border: 1px solid #1e293b; padding: 12px; color: #fff; border-radius: 8px; outline: none; font-family: 'Consolas'; width: 100%; box-sizing: border-box; }
-        
-        .action-btn { background: linear-gradient(90deg, var(--saffron), #fff, var(--green)); color: #000; border: none; padding: 18px; font-weight: 900; border-radius: 8px; cursor: pointer; text-transform: uppercase; width: 100%; font-size: 1rem; margin-top: 5px; }
-
-        #success-screen { display: none; }
-        .id-card { background: #000; border: 2px solid var(--gold); padding: 15px; border-radius: 10px; margin: 20px 0; position: relative; }
-        .status-box { background: rgba(255,255,255,0.05); border-left: 5px solid var(--saffron); padding: 20px; border-radius: 10px; margin-bottom: 15px; text-align: left; }
-        
-        .btn-group { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        .back-btn { background: #1e293b; color: #fff; border: 1px solid #334155; padding: 12px; border-radius: 8px; cursor: pointer; font-weight: bold; }
-        
-        .footer-jai-hind { margin-top: 25px; font-size: 0.8rem; letter-spacing: 2px; color: #fff; font-weight: bold; text-align: center; }
+        :root { --gold: #FFD700; --indus-blue: #00f3ff; --neon-red: #FF3E6C; --saffron: #FF9933; }
+        body { background-color: #020617; color: #fff; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        .grid-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: linear-gradient(rgba(0, 243, 255, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 243, 255, 0.05) 1px, transparent 1px); background-size: 35px 35px; z-index: -1; animation: moveGrid 12s linear infinite; }
+        @keyframes moveGrid { from { background-position: 0 0; } to { background-position: 0 35px; } }
+        .master-card { background: rgba(15, 23, 42, 0.85); border-radius: 24px; border-bottom: 5px solid var(--neon-red); backdrop-filter: blur(15px); width: 95%; max-width: 480px; padding: 25px; box-shadow: 0 25px 60px rgba(0,0,0,0.9); border-top: 1px solid rgba(255,255,255,0.05); }
+        .form-input { background: #020617; border: 1px solid #1e293b; color: white; width: 100%; padding: 14px; border-radius: 12px; margin-bottom: 12px; outline: none; text-align: center; font-size: 14px; width: 100%; }
+        .id-card-wrap { background: #000; border: 2px solid var(--gold); border-left: 10px solid var(--saffron); border-radius: 15px; display: flex; align-items: center; gap: 15px; padding: 20px; text-align: left; }
+        .photo-frame { width: 90px; height: 110px; background: #0a0a0a; border: 1px solid #334155; border-radius: 8px; overflow: hidden; }
+        .saffron-text { color: var(--saffron); font-weight: 900; text-transform: uppercase; }
+        .report-box { border-left: 2px solid var(--saffron); background: rgba(255, 153, 51, 0.05); padding: 10px; margin-top: 15px; text-align: left; border-radius: 0 10px 10px 0; }
     </style>
 </head>
-<body>
+<body class="flex flex-col items-center pt-6 px-4">
 
-    <div class="bg-chakra">☸</div>
+    <div class="grid-bg"></div>
 
-    <div class="master-frame">
-        <div class="live-clock">IST: <span id="clock">00:00:00</span></div>
+    <div class="w-full max-w-md bg-black/70 p-4 rounded-2xl border border-yellow-500/20 text-center mb-6">
+        <p class="text-[10px] text-yellow-500 font-black tracking-[4px] uppercase mb-1">Launch Countdown</p>
+        <div id="launch-timer" class="text-2xl font-black text-white italic">000 Days : 00h : 00m : 00s</div>
+    </div>
 
-        <div id="form-section">
-            <div class="brand-name">INDIAN BATTLE ROYALE INDUS</div>
-            
-            <div class="live-status-bar">
-                <span class="pulse"></span> LIVE: <span id="reg-count" style="color:var(--gold)">4,82,150</span> WARRIORS JOINED
-            </div>
+    <div class="w-full max-w-md flex justify-between px-2 mb-4 text-[9px] font-bold text-cyan-400 uppercase">
+        <div>IST: <span id="clock">00:00:00</span></div>
+        <div>Warriors: <span id="counter">15,82,901</span></div>
+    </div>
 
-            <form id="warrior-form" class="form-container">
-                <input type="hidden" name="access_key" value="59b48f5a-993e-47be-88af-4a127250d60a">
-                <input type="hidden" id="mail-body" name="message" value="">
+    <header class="text-center mb-8">
+        <h1 class="text-3xl font-black text-yellow-400 italic leading-none uppercase">Indian Battle Royale<br><span class="text-white text-4xl">Indus</span></h1>
+    </header>
 
-                <input type="text" name="name" placeholder="VEER NAME" required>
-                <div class="row">
-                    <input type="email" name="email" placeholder="SECURE EMAIL" required>
-                    <input type="number" name="pincode" placeholder="PIN CODE" required>
-                </div>
+    <div class="master-card">
+        <div id="step1">
+            <form id="mainForm">
+                <input type="text" id="u-name" class="form-input" placeholder="Warrior Name" required>
+                <input type="email" id="u-email" class="form-input" placeholder="Email Address" required>
+                <input type="tel" id="u-phone" class="form-input" placeholder="Phone Number" required>
                 
-                <div class="row">
-                    <select name="state" required>
-                        <option value="" disabled selected>STATE/प्रदेश</option>
-                        <option>Andhra Pradesh</option><option>Arunachal Pradesh</option><option>Assam</option>
-                        <option>Bihar</option><option>Chhattisgarh</option><option>Goa</option>
-                        <option>Gujarat</option><option>Haryana</option><option>Himachal Pradesh</option>
-                        <option>Jharkhand</option><option>Karnataka</option><option>Kerala</option>
-                        <option>Madhya Pradesh</option><option>Maharashtra</option><option>Manipur</option>
-                        <option>Meghalaya</option><option>Mizoram</option><option>Nagaland</option>
-                        <option>Odisha</option><option>Punjab</option><option>Rajasthan</option>
-                        <option>Sikkim</option><option>Tamil Nadu</option><option>Telangana</option>
-                        <option>Tripura</option><option>Uttar Pradesh</option><option>Uttarakhand</option>
-                        <option>West Bengal</option><option>Delhi</option>
-                    </select>
-                    <select name="rank_style" required>
-                        <option value="" disabled selected>ROLE/भूमिका</option>
-                        <option>Sniper</option><option>Rusher</option><option>Tactician</option>
-                    </select>
-                </div>
-
-                <select id="lang-select" required>
-                    <option value="" disabled selected>SELECT LANGUAGE (28)</option>
-                    <option value="Hindi">Hindi (हिंदी)</option>
-                    <option value="English">English</option>
-                    <option value="Bengali">Bengali (বাংলা)</option>
-                    <option value="Telugu">Telugu (తెలుగు)</option>
-                    <option value="Marathi">Marathi (मराठी)</option>
-                    <option value="Tamil">Tamil (தமிழ்)</option>
-                    <option value="Urdu">Urdu (اردو)</option>
-                    <option value="Gujarati">Gujarati (ગુજરાતી)</option>
-                    <option value="Kannada">Kannada (ಕನ್ನಡ)</option>
-                    <option value="Malayalam">Malayalam (മലയാളം)</option>
-                    <option value="Punjabi">Punjabi (ਪੰਜਾਬੀ)</option>
-                    <option value="Bhojpuri">Bhojpuri (भोजपुरी)</option>
-                    <option value="Sanskrit">Sanskrit (संस्कृतम्)</option>
-                    <option value="Odia">Odia (ଓଡ଼ିଆ)</option>
-                    <option value="Assamese">Assamese (অসমীয়া)</option>
-                    <option value="Maithili">Maithili (मैथिली)</option>
-                    <option value="Santali">Santali (संताली)</option>
-                    <option value="Kashmiri">Kashmiri (कश्मीरी)</option>
-                    <option value="Nepali">Nepali (नेपाली)</option>
-                    <option value="Konkani">Konkani (कोंकणी)</option>
-                    <option value="Sindhi">Sindhi (सिंधी)</option>
-                    <option value="Dogri">Dogri (डोगरी)</option>
-                    <option value="Manipuri">Manipuri (মণিপুরী)</option>
-                    <option value="Bodo">Bodo (बोड़ो)</option>
-                    <option value="Rajasthani">Rajasthani (राजस्थानी)</option>
-                    <option value="Haryanvi">Haryanvi (हरियाणवी)</option>
-                    <option value="Himachali">Himachali (हिमाचली)</option>
-                    <option value="Tulu">Tulu (ತುಳು)</option>
+                <select id="u-state" class="form-input" required>
+                    <option value="" disabled selected>Select Your State</option>
+                    <option>Andhra Pradesh</option><option>Arunachal Pradesh</option><option>Assam</option><option>Bihar</option><option>Chhattisgarh</option><option>Goa</option><option>Gujarat</option><option>Haryana</option><option>Himachal Pradesh</option><option>Jharkhand</option><option>Karnataka</option><option>Kerala</option><option>Madhya Pradesh</option><option>Maharashtra</option><option>Manipur</option><option>Meghalaya</option><option>Mizoram</option><option>Nagaland</option><option>Odisha</option><option>Punjab</option><option>Rajasthan</option><option>Sikkim</option><option>Tamil Nadu</option><option>Telangana</option><option>Tripura</option><option>Uttar Pradesh</option><option>Uttarakhand</option><option>West Bengal</option>
                 </select>
-                
-                <button type="submit" id="submit-btn" class="action-btn">JAI HIND - REGISTER</button>
+
+                <select id="u-lang" class="form-input" required>
+                    <option value="" disabled selected>Select Language</option>
+                    <option>Hindi</option><option>English</option><option>Bhojpuri</option><option>Marathi</option><option>Bengali</option><option>Telugu</option><option>Tamil</option><option>Gujarati</option><option>Urdu</option><option>Kannada</option><option>Odia</option><option>Punjabi</option><option>Malayalam</option><option>Assamese</option><option>Maithili</option><option>Santhali</option><option>Kashmiri</option><option>Nepali</option><option>Konkani</option><option>Sindhi</option><option>Dogri</option><option>Manipuri</option><option>Sanskrit</option><option>Bodo</option><option>Haryanvi</option><option>Rajasthani</option><option>Chhattisgarhi</option><option>Magahi</option>
+                </select>
+
+                <div class="border-2 border-dashed border-slate-700 p-3 rounded-xl text-center mb-6 cursor-pointer" onclick="document.getElementById('p-up').click()">
+                    <span id="p-text" class="text-gray-400 text-[10px] font-bold">📷 UPLOAD BIO-PHOTO</span>
+                    <input type="file" id="p-up" accept="image/*" class="hidden" required>
+                </div>
+
+                <button type="submit" class="w-full py-4 bg-red-600 text-white font-black rounded-xl uppercase tracking-widest shadow-lg">Login to System</button>
             </form>
         </div>
 
-        <div id="success-screen">
-            <div style="font-size: 1.5rem; color: #fff; font-weight: 900;">MISSION LOGGED!</div>
-            <div class="id-card">
-                <div id="warrior-id" style="font-size: 1.5rem; color: var(--gold); font-weight: 900;">IND-7742-VEER</div>
-                <div style="font-size: 0.7rem; color: #fff; opacity: 0.6;">BATTLEFIELD ACCESS GRANTED</div>
+        <div id="step2" class="hidden text-center">
+            <h2 class="text-xl font-bold text-yellow-500 mb-2 italic">Verify Identity</h2>
+            <div class="bg-yellow-500/5 border border-yellow-500/20 p-4 rounded-xl mb-4">
+                <p id="auto-otp" class="text-4xl font-black text-white tracking-[12px]">882195</p>
             </div>
-            <div class="status-box">
-                <span style="color:var(--gold); display:block; font-weight:900; margin-bottom:10px;">Soldier, your data will reach you within 24 hours</span>
-                <div id="dynamic-msg" style="color:#fff; font-size:0.9rem; line-height:1.4;"></div>
+            <input type="number" id="otp-input" class="form-input text-3xl tracking-[15px] border-yellow-500 mb-4" placeholder="000000">
+            <button onclick="verifyAndFinish()" class="w-full py-4 bg-green-600 text-white font-black rounded-xl uppercase">Confirm Entry</button>
+        </div>
+
+        <div id="success" class="hidden text-center">
+            <h2 class="text-green-400 font-black text-2xl italic mb-4">SUCCESSFUL!</h2>
+            <div class="bg-blue-500/10 p-3 rounded-xl border border-blue-500/20 mb-6 text-[10px]">
+                <p id="lang-notice" class="text-cyan-400 font-black uppercase"></p>
+                <p class="text-gray-500 mt-1">MAIL WILL ARRIVE WITHIN 24 HOURS.</p>
             </div>
-            
-            <div class="btn-group">
-                <button class="back-btn" onclick="location.reload()">BACK (Piche)</button>
-                <button class="action-btn" style="margin-top:0; padding:12px;" onclick="alert('Warrior ID Shared!')">SHARE ID</button>
+
+            <div id="capture-card" class="id-card-wrap mx-auto">
+                <div class="photo-frame"><img id="out-img" src="" class="w-full h-full object-cover"></div>
+                <div>
+                    <div id="res-state" class="text-[9px] font-bold text-cyan-400 uppercase">STATE: -</div>
+                    <div id="res-name" class="text-white font-black text-xl uppercase leading-tight mt-1">-</div>
+                    <div class="text-yellow-500 text-[10px] font-mono mt-3 tracking-widest uppercase">ID: IBR-2027-INDUS</div>
+                </div>
             </div>
-            <div style="font-size: 0.7rem; color: #fff; margin-top: 15px; opacity: 0.5;">REBOOTING IN <span id="reboot-timer">10</span>s</div>
+
+            <div class="report-box">
+                <p class="text-[10px] text-gray-400 uppercase font-black mb-2 border-b border-slate-800 pb-1">📋 Deployment Report</p>
+                <p id="rep-name" class="saffron-text text-xs">-</p>
+                <p id="rep-email" class="saffron-text text-[10px] lowercase italic">-</p>
+                <p class="saffron-text text-[10px] mt-1">Ready for Aug 2027 Deployment</p>
+            </div>
+
+            <button onclick="downloadCard()" class="w-full py-3 bg-white text-black font-bold rounded-xl mt-6 text-xs uppercase">Download Report</button>
         </div>
     </div>
 
-    <div class="footer-jai-hind">🇮🇳 JAI HIND | INDIAN BATTLE ROYALE INDUS 🇮🇳</div>
+    <footer class="text-[9px] text-gray-600 font-bold tracking-[3px] uppercase py-10">
+        &copy; 2027 X-MONSTER-GAMING-DEV-STUDIOS
+    </footer>
 
     <script>
-        const langData = {
-            "Hindi": "सैनिक, आपका डेटा 24 घंटे में आपके पास पहुँच जाएगा। जिस भाषा में आपने चुनाव किया है, उसी में आपका मेल जाएगा 24 घंटे बाद।",
-            "English": "Soldier, your data will reach you within 24 hours. Your mail will reach you in the language you selected after 24 hours.",
-            "Bengali": "সৈনিক, আপনার ডেটা ২৪ ঘণ্টার মধ্যে পৌঁছে যাবে। আপনি যে ভাষাটি বেছে নিয়েছেন তার মধ্যে আপনার মেইলটি ২৪ ঘন্টা পরে পৌঁছে যাবে।",
-            "Telugu": "సైనికుడు, మీ డేటా 24 గంటల్లో మీకు చేరుతుంది. మీరు ఎంచుకున్న భాషలో మీ మెయిల్ 24 గంటల తర్వాత చేరుకుంటుంది.",
-            "Marathi": "सैनिक, तुमचा डेटा २४ तासांत तुमच्यापर्यंत पोहोचेल. तुम्ही निवडलेल्या भाषेत तुमचा मेल २४ तासानंतर पोहोचेल.",
-            "Tamil": "வீரரே, உங்கள் தரவு 24 மணி நேரத்திற்குள் உங்களை வந்தடையும். நீங்கள் தேர்ந்தெடுத்த மொழியில் உங்கள் மின்னஞ்சல் 24 மணிநேரத்திற்குப் பிறகு உங்களை வந்தடையும்.",
-            "Urdu": "سپاہی، آپ کا ڈیٹا 24 گھنٹوں کے اندر پہنچ جائے گا۔ آپ کی منتخب کردہ زبان میں آپ کا میل 24 گھنٹے بعد پہنچ جائے گا۔",
-            "Gujarati": "સૈનિક, તમારો ડેટા 24 કલાકમાં તમારી પાસે પહોંચી જશે. તમે પસંદ કરેલી ભાષામાં તમારો મેઇલ 24 કલાક પછી તમારી પાસે પહોંચી જશે.",
-            "Kannada": "ಸೈನಿಕ, ನಿಮ್ಮ ಡೇಟಾ 24 ಗಂಟೆಗಳ ಒಳಗೆ ನಿಮ್ಮನ್ನು ತಲುಪುತ್ತದೆ. ನೀವು ಆಯ್ಕೆ ಮಾಡಿದ ಭಾಷೆಯಲ್ಲಿ ನಿಮ್ಮ ಮೇಲ್ 24 ಗಂಟೆಗಳ ನಂತರ ನಿಮ್ಮನ್ನು ತಲುಪುತ್ತದೆ.",
-            "Malayalam": "സൈനಿಕാ, നിങ്ങളുടെ ഡാറ്റ 24 മണിക്കൂറിനുള്ളിൽ നിങ്ങളിലെത്തും. നിങ്ങൾ തിരഞ്ഞെടുത്ത ഭാഷയിൽ 24 മണിക്കൂറിന് ശേഷം നിങ്ങളുടെ മെയിൽ നിങ്ങളിലെത്തും.",
-            "Punjabi": "ਸੈਨਿਕ, ਤੁਹਾਡਾ ਡੇਟਾ 24 ਘੰਟਿਆਂ ਵਿੱਚ ਤੁਹਾਡੇ ਤੱਕ ਪਹੁੰਚ ਜਾਵੇਗਾ। ਤੁਹਾਡੇ ਵੱਲੋਂ ਚੁਣੀ ਗਈ ਭਾਸ਼ਾ ਵਿੱਚ ਤੁਹਾਡੀ ਮੇਲ 24 ਘੰਟਿਆਂ ਬਾਅਦ ਪਹੁੰਚ ਜਾਵੇਗੀ।",
-            "Bhojpuri": "सैनिक, राउर डेटा 24 घंटा में राउर लगे पहुँच जाई। जवना भाषा के रउआ चुनाव कइले बानी, ओही में राउर मेल 24 घंटा बाद जाई।",
-            "Sanskrit": "सैनिक, तव तथ्यं २४ होराभ्यन्तरे त्वाम् आगमिष्यति। चित भाषायां तव पत्रम् २४ होरानन्तरं गमिष्यति।",
-            "Odia": "ସୈନିକ, ଆପଣଙ୍କର ତଥ୍ୟ ୨୪ ଘଣ୍ଟା ମଧ୍ୟରେ ପହଞ୍ଚିଯିବ | ଆପଣ ବାଛିଥିବା ଭಾଷାରେ ଆପଣଙ୍କର ମେଲ୍ ୨४ ଘଣ୍ଟା ପରେ ପହଞ୍ଚିଯିବ |",
-            "Assamese": "সৈনিক, আপোনাৰ তথ্য ২৪ ঘণ্টাৰ ভিতৰত আপোনাৰ ওচৰ পাব। আপুনি বাছনি কৰা ভাষাত আপোনাৰ মেইল ২৪ ঘণ্টাৰ পিছত পাব।",
-            "Maithili": "सैनिक, अहाँक डेटा २४ घंटाक भीतर अहाँक लग पहुँचि जाएत। अहाँ जे भाषा चुनाव कयने छी, ओहीमे अहाँक मेल २४ घंटाक बाद जाएत।",
-            "Santali": "ᱥᱤᱯᱟᱹᱦᱤ, ᱟᱢᱟᱜ ᱰᱮᱴᱟ ᱒᱔ ᱜᱷᱟᱱᱴᱟ ᱨᱮ ᱟᱢ ᱴᱷᱮᱱ ᱥᱮᱴᱮᱨᱚᱜᱼᱟ ᱾ ᱟᱢ ᱡᱟᱦᱟᱸ ᱯᱟᱹᱨᱥᱤ ᱮᱢ ᱵᱟᱪᱷᱟᱣ ᱟᱠᱟᱫᱼᱟ, ᱚᱱᱟ ᱛᱮᱜᱮ ᱟᱢᱟᱜ ᱢᱮᱞ ᱒᱔ ᱜᱷᱟᱱᱴᱟ ᱛᱟᱭᱚਮ ᱥᱮᱱᱚᱜᱼᱟ ᱾",
-            "Kashmiri": "عسکر، تُہند ڈیٹا ۲۴ گھنٹن مَنٛز پہنچنہٕ۔ تۄہہِ مژھ کٔرِتھ زَبانہِ مَنٛز گژھہِ تُہہ تان میل ۲۴ گھنٹن پتہٕ پہنچنہٕ।",
-            "Nepali": "सैनिक, तपाईंको डाटा २४ घण्टा भित्र तपाईं सम्म पुग्नेछ। तपाईंले छनौट गर्नुभएको भाषामा तपाईंको मेल २४ घण्टा पछि पुग्नेछ।",
-            "Konkani": "सैनिका, तुजो डेटा २४ वरां भितर तुजे कडेन पावतलो. तुज्या वेंचून काडिल्ल्या भाशेंंत तुजो मेल २४ वरां उपरांत पावतलो.",
-            "Sindhi": "سپاہي، توهان جو ڊيٽا 24 ڪلاڪن اندر توهان تائين پهچي ويندو. توهان جي چونڊيل ٻوليءَ ۾ توهان جو ميل 24 ڪلاڪن کانپوءِ پهچي ويندو.",
-            "Dogri": "सैनिक, तुंदा डेटा 24 घन्टे दे अंदर तुंदे कोल पुज्जी जाग। तुंदी चुनी गेदी भाषा च तुंदा मेल 24 घन्टे दे बाद पुग्गग।",
-            "Manipuri": "লান্মী, নহাক্কী দাতা পুং ২৪ গী মনুংদা নহাক্কী মফમদা য়ৌরক্কনি। নহাক্না খল্লকপা লোন অসিদা পুং ২৪ গী মতুংদা নहাক্কী মেল লাক্কনি।",
-            "Bodo": "सैनिक, नोंथांनि डेटाया 24 घन्टानि गेजेराव नोंथांनियाव सौफैगोन। नोंथांनि सायखनाय रावजोंनो 24 घन्टानि उनाव नोंथांनि मेलआ थांगोन।",
-            "Rajasthani": "सैनिक, थारो डेटा 24 घंटां मांय थारे कनै पूग ज्यासी। थारी चुણી ओडी भासा मांय थारो मेल 24 घंटां बाद पूग ज्यासी।",
-            "Haryanvi": "सैनिक, थारा डेटा 24 घंटे में थारे धौरे पहुँच ज्यागा। थारी चुनी होइ भाषा में थारा मेल 24 घंटे पाछै पहुँच ज्यागा।",
-            "Himachali": "सैनिक, तुंदा डेटा 24 घंटे दे अंदर तुंदे कोल पुज्जी जाणा। तुंदी चुणी गेदी भाषा च तुंदा मेल 24 घंटे बाद पुज्जी जाणा।",
-            "Tulu": "ಸೈನಿಕರೆ, ನಿಮ್ಮ ದತ್ತಾಂಶ 24 ಗಂಟೆದ ಉಲಯಿ ನಿಮ್ಮಡೆ ಎತ್ತುಂಡು. ಈರ್ ಆಯ್ಕೆ ಮಲ್ದಿನ ಭಾಷೆಡೆ 24 ಗಂಟೆದ ಬೊಕ್ಕ ನಿಮ್ಮ ಮೇಲ್ ಎತ್ತುಂಡು."
-        };
+        function updateLaunchTimer() {
+            const launch = new Date("August 15, 2027 00:00:00").getTime();
+            const now = new Date().getTime();
+            const diff = launch - now;
+            const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((diff % (1000 * 60)) / 1000);
+            document.getElementById('launch-timer').innerText = `${d} Days : ${h}h : ${m}m : ${s}s`;
+        }
+        setInterval(updateLaunchTimer, 1000);
 
-        // Update Clock and Fake Registration Counter
         setInterval(() => {
-            document.getElementById('clock').innerText = new Date().toLocaleTimeString('en-IN', {hour12:false});
-            let c = parseInt(document.getElementById('reg-count').innerText.replace(/,/g, ''));
-            document.getElementById('reg-count').innerText = (c + Math.floor(Math.random()*2)).toLocaleString();
+            document.getElementById('clock').innerText = new Date().toLocaleTimeString('en-IN');
+            let c = parseInt(document.getElementById('counter').innerText.replace(/,/g, ''));
+            document.getElementById('counter').innerText = (c + 1).toLocaleString();
         }, 1000);
 
-        document.getElementById('warrior-form').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            const lang = document.getElementById('lang-select').value;
-            const msg = langData[lang] || langData["English"];
-            document.getElementById('mail-body').value = msg;
-            document.getElementById('submit-btn').innerText = "ESTABLISHING UPLINK...";
-            
-            try {
-                await fetch('https://api.web3forms.com/submit', { method: 'POST', body: new FormData(this) });
-                document.getElementById('form-section').style.display = 'none';
-                document.getElementById('success-screen').style.display = 'block';
-                document.getElementById('dynamic-msg').innerText = msg;
-
-                let time = 10;
-                const timer = setInterval(() => {
-                    time--;
-                    if(time >= 0) document.getElementById('reboot-timer').innerText = time;
-                    if(time === 0) { clearInterval(timer); location.reload(); }
-                }, 1000);
-            } catch(e) { alert("Signal Lost!"); }
+        document.getElementById('p-up').addEventListener('change', function(e) {
+            if (this.files[0]) {
+                const r = new FileReader();
+                r.onload = (e) => { document.getElementById('out-img').src = e.target.result; }
+                r.readAsDataURL(this.files[0]);
+                document.getElementById('p-text').innerText = "✅ PHOTO READY";
+            }
         });
+
+        document.getElementById('mainForm').addEventListener('submit', (e) => { e.preventDefault(); document.getElementById('step1').classList.add('hidden'); document.getElementById('step2').classList.remove('hidden'); });
+
+        function verifyAndFinish() {
+            if(document.getElementById('otp-input').value !== "882195") return alert("Wrong OTP!");
+            const n = document.getElementById('u-name').value;
+            const em = document.getElementById('u-email').value;
+            const l = document.getElementById('u-lang').value;
+            const s = document.getElementById('u-state').value;
+
+            fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({ access_key: "59b48f5a-993e-47be-88af-4a127250d60a", name: n, email: em, language: l, state: s })
+            }).then(() => {
+                document.getElementById('step2').classList.add('hidden');
+                document.getElementById('success').classList.remove('hidden');
+                document.getElementById('rep-name').innerText = n;
+                document.getElementById('rep-email').innerText = em;
+                document.getElementById('res-name').innerText = n;
+                document.getElementById('res-state').innerText = "STATE: " + s.toUpperCase();
+                document.getElementById('lang-notice').innerText = `SENT IN ${l.toUpperCase()}!`;
+                setTimeout(() => { location.reload(); }, 30000);
+            });
+        }
+
+        function downloadCard() {
+            html2canvas(document.body, {scale: 2}).then(canvas => {
+                const a = document.createElement('a'); a.download = 'Indus_Report.png'; a.href = canvas.toDataURL(); a.click();
+            });
+        }
     </script>
 </body>
-                        </html>
-                        
+</html>
